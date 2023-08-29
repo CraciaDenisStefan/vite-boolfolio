@@ -12,25 +12,42 @@ export default {
             baseUrl: 'http://127.0.0.1:8000',
             projects: [],
             loading: true,
+            currentPage: 1,
+            lastPage: null,
+
         }
     },
     created(){
-        this.getProjects();
+        this.getProjects(1);
     },
     methods: {
-        getProjects(){
+        getProjects(num_page){
             this.loading = true;
 
-            axios.get(`${this.baseUrl}/api/projects`).then((response)=>{
+            //  CHIAMATA SENZA PAGINAZIONE
+            // axios.get(`${this.baseUrl}/api/projects`).then((response)=>{
 
-                if(response.data.status){
-                    this.projects = response.data.results;
-                    this.loading =false;
-                }
-                else{
+            //     if(response.data.status){
+            //         this.projects = response.data.results;
+            //         this.loading =false;
+            //     }
+            //     else{
 
-                }
+            //     }
+            // })
+             
+            axios.get(`${this.baseUrl}/api/projects`,{ params: { page: num_page}}).then((response) =>{
+
+                this.projects = response.data.results.data;
+                this.currentPage = response.data.results.current_page;
+                this.lastPage = response.data.results.last_page;
+                this.loading = false;
+
+
             })
+            
+
+
         },
         truncateText(text){
             if(text.length > 100){
@@ -75,6 +92,20 @@ export default {
                         <a href="#">Apri</a>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <nav>
+                <ul class="pagination">
+                    <li :class="currentPage === 1 ? 'disabled' : ''">
+                        <button class="page-link" @click="getProjects(currentPage - 1)">Precedente</button>
+                    </li>
+                    <li :class="currentPage === lastPage ? 'disabled' : ''">
+                        <button class="page-link" @click="getProjects(currentPage + 1)">Successivo</button>
+                    </li>
+                </ul>
+            </nav>
             </div>
         </div>
     </div>
