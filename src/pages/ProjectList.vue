@@ -1,8 +1,8 @@
 <script>
 import axios from 'axios';
-import AppLoader from './AppLoader.vue';
+import AppLoader from '../components/AppLoader.vue';
 export default {
-    name: 'AppMain',
+    name: 'ProjectList',
     components:{
         AppLoader
     },
