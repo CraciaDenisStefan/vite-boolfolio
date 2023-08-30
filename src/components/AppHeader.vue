@@ -3,8 +3,18 @@ export default {
     name: 'AppHeader',
     data(){
         return{
-            logo: 'https://media.licdn.com/dms/image/D4E03AQFoIph97A61kA/profile-displayphoto-shrink_800_800/0/1689181792161?e=1697068800&v=beta&t=cfrfMFDG5zYhJxofVwqeeN8y_6K4STNUl8so1npTZB4'
-        }
+            logo: 'https://media.licdn.com/dms/image/D4E03AQFoIph97A61kA/profile-displayphoto-shrink_800_800/0/1689181792161?e=1697068800&v=beta&t=cfrfMFDG5zYhJxofVwqeeN8y_6K4STNUl8so1npTZB4',
+            menuHeader:[
+              {
+                label: 'Home',
+                routeName: 'home'
+              },
+              {
+                label: 'Progetti',
+                routeName: 'projects'
+              }
+            ]
+          }
     }
 }
 </script>
@@ -20,11 +30,8 @@ export default {
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li class="nav-item" v-for="(menu, index) in menuHeader" :key="index">
+            <router-link class="nav-link" :to="{name: menu.routeName}">{{menu.label}}</router-link>
         </li>
       </ul>
     </div>
