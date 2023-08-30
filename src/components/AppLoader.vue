@@ -17,6 +17,10 @@ export default {
         height: 120px;
         -webkit-animation: spin 2s linear infinite; /* Safari */
         animation: spin 2s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(- 50%, - 50%);
     }
 
     /* Safari */

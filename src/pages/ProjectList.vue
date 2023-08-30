@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import {store} from '../store.js'
 import AppLoader from '../components/AppLoader.vue';
 export default {
     name: 'ProjectList',
@@ -9,9 +10,8 @@ export default {
     
     data(){
         return{
-            baseUrl: 'http://127.0.0.1:8000',
+            store,
             projects: [],
-            loading: true,
             currentPage: 1,
             lastPage: null,
 
@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         getProjects(num_page){
-            this.loading = true;
+            this.store.loading = true;
 
             //  CHIAMATA SENZA PAGINAZIONE
             // axios.get(`${this.baseUrl}/api/projects`).then((response)=>{
@@ -36,12 +36,12 @@ export default {
             //     }
             // })
              
-            axios.get(`${this.baseUrl}/api/projects`,{ params: { page: num_page}}).then((response) =>{
+            axios.get(`${this.store.baseUrl}/api/projects`,{ params: { page: num_page}}).then((response) =>{
 
                 this.projects = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
-                this.loading = false;
+                this.store.loading = false;
 
 
             })
@@ -64,14 +64,14 @@ export default {
     <div class="container">
         <h1 class="text-center my-5">Progetti</h1>
     </div>
-    <AppLoader v-if="loading"/>
+    <AppLoader v-if="store.loading"/>
     <div v-else class="container">
         <div class="row">
             <div class="col-12 col-md-4" v-for="project in projects" :key="project.id">
                 <div class="card m-1 h_max_card">
                     <div class="card-header">{{project.title}}</div>
                     <div class="card-image-top">
-                        <img v-if="project.cover_image !== null" :src="`${baseUrl}/storage/${project.cover_image}`" class="img-fluid">
+                        <img v-if="project.cover_image !== null" :src="`${this.store.baseUrl}/storage/${project.cover_image}`" class="img-fluid">
                         <img v-else src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/No_immagine_disponibile.svg/300px-No_immagine_disponibile.svg.png" class="img-fluid">
                     </div>
                     <div class="card-body h_max">
