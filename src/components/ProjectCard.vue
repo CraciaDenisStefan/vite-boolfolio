@@ -48,7 +48,7 @@ export default {
             {{truncateText(project.description)}}
         </div>
         <div class="card-footer">
-            <a href="#">Apri</a>
+            <router-link class="btn btn-primary" :to="{name: 'single-project', params: {title: project.title}}">Apri</router-link>
         </div>
     </div>
 
