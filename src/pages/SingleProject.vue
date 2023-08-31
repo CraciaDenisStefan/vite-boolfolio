@@ -26,7 +26,8 @@ export default {
                     this.store.loading = false;
                 }
                 else{
-
+                    this.$router.push({ name: 'not-found' });
+                    
                 }
 
             })
