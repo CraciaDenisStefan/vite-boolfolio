@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage.vue';
 import ProjectList from './pages/ProjectList.vue';
 import SingleProject from './pages/SingleProject.vue';
 import NotFound from './pages/NotFound.vue';
+import AboutUs from './pages/AboutUs.vue';
 
 const router = createRouter({
 
@@ -24,6 +25,11 @@ const router = createRouter({
             path:'/project/:title',
             name: 'single-project',
             component: SingleProject,
+        },
+        {
+            path: '/about-us',
+            name: 'about-us',
+            component: AboutUs,
         },
         {
             path:'/pagina-non-trovata',

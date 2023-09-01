@@ -12,6 +12,10 @@ export default {
               {
                 label: 'Progetti',
                 routeName: 'projects'
+              },
+              {
+                label: 'Chi siamo',
+                routeName: 'about-us'
               }
             ]
           }
